@@ -132,6 +132,69 @@ function initSenderMode() {
           });
         }
 
+        const btnTestMediumFlex = document.getElementById('btn-send-test-medium-flex');
+        if (btnTestMediumFlex) {
+          btnTestMediumFlex.addEventListener('click', () => {
+            const activeTemplate = selectTemplate.value;
+            let cardTitle = '';
+            if (activeTemplate === 'custom') {
+              cardTitle = inputCustomTitle.value.trim() || '自訂禮物商品';
+            } else {
+              cardTitle = GIFT_TEMPLATES[activeTemplate].title;
+            }
+            const encodedPrankText = encodeURIComponent(inputPrankText.value.trim() || '測試');
+            const targetLiffUrl = `https://liff.line.me/${LIFF_ID}?auto=yes&text=${encodedPrankText}`;
+            
+            sendDiagnosticMessage([
+              {
+                type: 'flex',
+                altText: '【LINE 禮物測試】中等 Flex 測試訊息',
+                contents: {
+                  type: 'bubble',
+                  hero: {
+                    type: 'image',
+                    url: 'https://yjkai.github.io/line-prank/justforyou.png',
+                    size: 'full',
+                    aspectRatio: '1:1',
+                    aspectMode: 'cover',
+                    action: {
+                      type: 'uri',
+                      uri: targetLiffUrl
+                    }
+                  },
+                  body: {
+                    type: 'box',
+                    layout: 'vertical',
+                    contents: [
+                      {
+                        type: 'text',
+                        text: cardTitle,
+                        weight: 'bold',
+                        wrap: true
+                      }
+                    ]
+                  },
+                  footer: {
+                    type: 'box',
+                    layout: 'vertical',
+                    contents: [
+                      {
+                        type: 'button',
+                        style: 'primary',
+                        action: {
+                          type: 'uri',
+                          label: '打開測試連結',
+                          uri: targetLiffUrl
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            ], '中等 Flex 測試');
+          });
+        }
+
         function sendDiagnosticMessage(payload, testName) {
           diagLog.style.display = 'block';
           diagLog.textContent = `[${testName}] 正在啟動好友選取器...`;
