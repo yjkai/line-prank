@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LINE 禮物 - 驚喜送禮</title>
+  <!-- Google Fonts for Modern Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- FontAwesome for Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Local Styles -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ==================== SENDER VIEW (送禮者設定介面) ==================== -->
+  <div id="sender-view" class="view-container hidden">
+    <header class="app-header">
+      <div class="header-logo">
+        <i class="fa-solid fa-gift gift-logo-icon"></i>
+        <span>HAO LINE LIFF <span class="badge">Prank v2.0</span></span>
+      </div>
+      <p class="header-subtitle">自訂專屬 LINE 禮物，送給好友一個驚喜！</p>
+    </header>
+
+    <main class="main-content">
+      <!-- LOGIN BLOCK (未登入時顯示) -->
+      <section id="login-section" class="glass-card login-card hidden">
+        <div class="login-icon-wrapper">
+          <i class="fa-solid fa-user-shield"></i>
+        </div>
+        <h2>LINE 帳號登入</h2>
+        <p>此頁面將藉由 LINE 官方授權登入，以取得您的基本資料（名稱、頭像、UID）並允許將禮物卡片傳送給您的好友。</p>
+        <button id="btn-login" class="btn btn-primary btn-line">
+          <i class="fa-brands fa-line"></i> 使用 LINE 登入
+        </button>
+      </section>
+
+      <!-- DASHBOARD BLOCK (已登入時顯示) -->
+      <section id="dashboard-section" class="dashboard-grid hidden">
+        
+        <!-- 左側：設定控制面板 -->
+        <div class="glass-card config-panel">
+          <div class="user-profile">
+            <img id="user-avatar" src="https://via.placeholder.com/150" alt="頭像" class="avatar">
+            <div class="user-info">
+              <span class="welcome-text">歡迎回來</span>
+              <span id="user-name" class="user-name">Loading...</span>
+            </div>
+            <button id="btn-logout" class="btn-logout" title="登出"><i class="fa-solid fa-right-from-bracket"></i></button>
+          </div>
+
+          <h3 class="section-title"><i class="fa-solid fa-sliders"></i> 禮物設定</h3>
+          
+          <div class="form-group">
+            <label for="prank-text">
+              <i class="fa-solid fa-comment-slash"></i> 惡作劇發送文字
+              <span class="tooltip-icon" title="當好友點擊「打開我的禮物」時，他會被迫以自己的身份在聊天室發出此段文字。"><i class="fa-solid fa-circle-question"></i></span>
+            </label>
+            <input type="text" id="prank-text" placeholder="例：我愛大家！我是大笨蛋！" value="我今天請全辦公室喝飲料，大家快點登記！">
+            <div class="suggestions">
+              <span class="suggestion-tag" data-text="我今天請全辦公室喝飲料，大家快點登記！">請飲料</span>
+              <span class="suggestion-tag" data-text="我宣布，我是大白痴 🤪">自我解嘲</span>
+              <span class="suggestion-tag" data-text="我決定下個月跟大家表白！">真心話</span>
+              <span class="suggestion-tag" data-text="有人要跟我約會嗎？我請看電影！">約會邀請</span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="gift-template"><i class="fa-solid fa-tags"></i> 選擇禮物範本</label>
+            <select id="gift-template">
+              <option value="starbucks">【星巴克】特大杯巧克力可可碎片星冰樂雙杯組</option>
+              <option value="brownsugar">【7-ELEVEN】冰黑糖珍珠撞奶(大)好禮即享券</option>
+              <option value="mcdonalds">【麥當勞】麥香雞 + 冰檸檬紅茶(中) 即享券</option>
+              <option value="custom">自訂禮物內容 (自訂標題與圖片)</option>
+            </select>
+          </div>
+
+          <!-- 自訂選項 (僅在選擇自訂時顯示) -->
+          <div id="custom-gift-fields" class="hidden-fields hidden">
+            <div class="form-group">
+              <label for="custom-title">自訂禮物名稱</label>
+              <input type="text" id="custom-title" placeholder="請輸入禮物名稱">
+            </div>
+            <div class="form-group">
+              <label for="custom-image">自訂禮物圖片 URL</label>
+              <input type="url" id="custom-image" placeholder="https://example.com/image.jpg">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="card-header-text"><i class="fa-solid fa-heading"></i> 卡片頂部節日標題</label>
+            <textarea id="card-header-text" rows="2">0430世界珍奶日
+你值得來喝一杯 🧋</textarea>
+          </div>
+
+          <button id="btn-send" class="btn btn-primary btn-send-gift">
+            <i class="fa-solid fa-share-nodes"></i> 選擇好友並傳送禮物
+          </button>
+        </div>
+
+        <!-- 右側：即時卡片預覽 -->
+        <div class="preview-panel">
+          <h3 class="section-title"><i class="fa-solid fa-eye"></i> 即時 Flex Message 預覽</h3>
+          
+          <div class="flex-message-mock">
+            <!-- 仿 LINE 官方 Flex Message 卡片 -->
+            <div class="mock-card">
+              <!-- 卡片頂部：黃色背景 + 節日標題 -->
+              <div id="preview-header" class="card-header">
+                <div id="preview-header-text" class="header-title">0430世界珍奶日<br>你值得來喝一杯 🧋</div>
+                <div class="header-character">
+                  <div class="sallie-mock">
+                    <div class="sallie-head"></div>
+                    <div class="sallie-cup"></div>
+                  </div>
+                </div>
+                <div class="header-footer">© LY Corp.</div>
+              </div>
+
+              <!-- 卡片主體 -->
+              <div class="card-body">
+                <div class="product-info">
+                  <img id="preview-image" src="" alt="商品圖片" class="product-img">
+                  <div id="preview-title" class="product-title"></div>
+                </div>
+                
+                <div class="divider"></div>
+                
+                <div class="surprise-section">
+                  <span class="surprise-tag">驚喜活動</span>
+                  <p class="surprise-desc">您收到的禮物有機會獲得活動驚喜好禮喔，快來看看吧！</p>
+                </div>
+
+                <div class="card-buttons">
+                  <button class="btn-mock btn-mock-primary">打開我的禮物</button>
+                  <button class="btn-mock">挑選感謝禮物</button>
+                  <button class="btn-mock">傳送感謝小卡</button>
+                </div>
+              </div>
+
+              <!-- 卡片底部 -->
+              <div class="card-footer">
+                <div class="footer-left">
+                  <span class="gift-icon-mock"><i class="fa-solid fa-gift"></i></span>
+                  <span>LINE 禮物</span>
+                </div>
+                <i class="fa-solid fa-chevron-right footer-arrow"></i>
+              </div>
+            </div>
+            <p class="preview-note"><i class="fa-solid fa-info-circle"></i> 以上為發出後的 Flex Message 樣式模擬，按鈕將會連結至整人觸發頁面。</p>
+          </div>
+        </div>
+
+      </section>
+    </main>
+
+    <footer class="app-footer">
+      <p>© 2026 HAO LINE LIFF. All Rights Reserved. 本網頁僅供娛樂整人使用，請勿用於惡意詐騙。</p>
+    </footer>
+  </div>
+
+
+  <!-- ==================== RECEIVER VIEW (收禮者自動觸發介面) ==================== -->
+  <div id="receiver-view" class="view-container receiver-mode hidden">
+    <div class="receiver-glass-card">
+      <div class="gift-animation">
+        <div class="gift-box">
+          <div class="gift-lid"></div>
+          <div class="gift-ribbon"></div>
+        </div>
+        <div class="loading-ring">
+          <div></div><div></div><div></div><div></div>
+        </div>
+      </div>
+      
+      <div class="status-content">
+        <h2 id="receiver-status-title">正在打開您的禮物...</h2>
+        <p id="receiver-status-desc" class="status-desc">LINE 禮物正在為您讀取卡片內容，這大約需要一到兩秒鐘，請不要關閉視窗。</p>
+      </div>
+
+      <!-- 手動觸發備用按鈕 (預設隱藏) -->
+      <div id="receiver-fallback" class="fallback-action hidden">
+        <p class="error-msg"><i class="fa-solid fa-circle-exclamation"></i> 自動開啟失敗，請確認您已同意權限，並點擊下方按鈕領取。</p>
+        <button id="btn-manual-trigger" class="btn btn-primary">
+          <i class="fa-solid fa-gift"></i> 手動打開禮物
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- LIFF SDK -->
+  <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+  <!-- Core Logic -->
+  <script src="app.js"></script>
+</body>
+</html>
