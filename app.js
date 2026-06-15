@@ -8,7 +8,7 @@
 // 1. 送禮者 LIFF ID (建議在 LINE Console 設為 Full 或 Tall，方便編輯卡片與設定)
 const SENDER_LIFF_ID = '2010405195-O4nJcnXp'; 
 // 2. 收禮者 LIFF ID (建議在 LINE Console 中新增一個設為 Compact 且 URL 相同的 LIFF，並將 ID 填在此。若留空則使用與送禮者相同的 ID)
-const RECEIVER_LIFF_ID = ''; 
+const RECEIVER_LIFF_ID = '2010405195-Y98upKPh'; 
 
 // 根據模式自動決定載入時初始化的 ID
 const isReceiverModeActive = new URLSearchParams(window.location.search).get('auto') === 'yes';
