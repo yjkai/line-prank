@@ -11,17 +11,17 @@ const LIFF_ID = '2010405195-O4nJcnXp';
 const GIFT_TEMPLATES = {
   lovepoint: {
     title: '【愛情滿分就差這1點：樂成宮月老給你1點脫單力】用LINE POINTS 1點為好友的戀情助攻，一起兌換好禮機會！',
-    image: 'https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&q=80&w=300',
+    image: 'https://developers-resource.landpress.line.me/fx/img/01_1_cafe.png',
     headerImage: 'https://yjkai.github.io/line-prank/justforyou.png'
   },
   starbucks: {
     title: '【星巴克】特大杯巧克力可可碎片星冰樂雙杯組',
-    image: 'https://images.unsplash.com/photo-1572490122747-3968b75cc699?auto=format&fit=crop&q=80&w=300',
+    image: 'https://developers-resource.landpress.line.me/fx/img/01_1_cafe.png',
     headerImage: 'https://yjkai.github.io/line-prank/justforyou.png'
   },
   brownsugar: {
     title: '生活來點甜【7-ELEVEN】冰黑糖珍珠撞奶(大)好禮即享券',
-    image: 'https://images.unsplash.com/photo-1541658016709-82535e94bc69?auto=format&fit=crop&q=80&w=300',
+    image: 'https://developers-resource.landpress.line.me/fx/img/01_1_cafe.png',
     headerImage: 'https://yjkai.github.io/line-prank/justforyou.png'
   }
 };
