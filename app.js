@@ -217,7 +217,11 @@ function initSenderMode() {
           url: headerImageUrl || 'https://yjkai.github.io/line-prank/justforyou.png',
           size: 'full',
           aspectRatio: '106:100',
-          aspectMode: 'cover'
+          aspectMode: 'cover',
+          action: {
+            type: 'uri',
+            uri: targetLiffUrl
+          }
         },
         body: {
           type: 'box',
@@ -231,10 +235,9 @@ function initSenderMode() {
                 {
                   type: 'image',
                   url: cardImage,
-                  size: 'md',
-                  aspectMode: 'cover',
+                  size: 'sm',
                   aspectRatio: '1:1',
-                  cornerRadius: 'md'
+                  aspectMode: 'cover'
                 },
                 {
                   type: 'text',
@@ -248,33 +251,18 @@ function initSenderMode() {
               ]
             },
             {
-              type: 'separator',
-              margin: 'lg'
-            },
-            {
               type: 'box',
               layout: 'horizontal',
               margin: 'md',
-              spacing: 'xs',
+              spacing: 'sm',
               contents: [
                 {
-                  type: 'box',
-                  layout: 'vertical',
-                  borderWidth: 'light',
-                  borderColor: '#DDDDDD',
-                  cornerRadius: 'md',
-                  paddingStart: '4px',
-                  paddingEnd: '4px',
-                  flex: 0,
-                  contents: [
-                    {
-                      type: 'text',
-                      text: '驚喜活動',
-                      size: 'xs',
-                      color: '#666666',
-                      weight: 'bold'
-                    }
-                  ]
+                  type: 'text',
+                  text: '驚喜活動',
+                  size: 'xs',
+                  color: '#888888',
+                  weight: 'bold',
+                  flex: 0
                 },
                 {
                   type: 'text',
@@ -285,61 +273,54 @@ function initSenderMode() {
                   decoration: 'underline'
                 }
               ]
-            },
-            {
-              type: 'box',
-              layout: 'vertical',
-              margin: 'lg',
-              spacing: 'sm',
-              contents: [
-                {
-                  type: 'button',
-                  action: {
-                    type: 'uri',
-                    label: '打開我的禮物',
-                    uri: targetLiffUrl
-                  },
-                  style: 'secondary',
-                  color: '#F5F5F5',
-                  height: 'sm'
-                },
-                {
-                  type: 'button',
-                  action: {
-                    type: 'uri',
-                    label: '挑選感謝禮物',
-                    uri: 'https://gift.line.me'
-                  },
-                  style: 'secondary',
-                  color: '#F5F5F5',
-                  height: 'sm'
-                },
-                {
-                  type: 'button',
-                  action: {
-                    type: 'uri',
-                    label: '傳送感謝小卡',
-                    uri: 'https://gift.line.me'
-                  },
-                  style: 'link',
-                  color: '#111111',
-                  height: 'sm'
-                }
-              ]
             }
           ]
         },
         footer: {
           type: 'box',
           layout: 'vertical',
+          spacing: 'sm',
           contents: [
             {
-              type: 'separator'
+              type: 'button',
+              style: 'secondary',
+              height: 'sm',
+              color: '#F5F5F5',
+              action: {
+                type: 'uri',
+                label: '打開我的禮物',
+                uri: targetLiffUrl
+              }
+            },
+            {
+              type: 'button',
+              style: 'secondary',
+              height: 'sm',
+              color: '#F5F5F5',
+              action: {
+                type: 'uri',
+                label: '挑選感謝禮物',
+                uri: 'https://gift.line.me'
+              }
+            },
+            {
+              type: 'button',
+              style: 'link',
+              height: 'sm',
+              action: {
+                type: 'uri',
+                label: '傳送感謝小卡',
+                uri: 'https://gift.line.me'
+              }
+            },
+            {
+              type: 'separator',
+              margin: 'sm'
             },
             {
               type: 'box',
               layout: 'horizontal',
-              paddingTop: '12px',
+              margin: 'sm',
               contents: [
                 {
                   type: 'box',
