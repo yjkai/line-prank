@@ -260,7 +260,7 @@ function initSenderMode() {
                 {
                   type: 'box',
                   layout: 'vertical',
-                  borderWidth: '1px',
+                  borderWidth: 'light',
                   borderColor: '#DDDDDD',
                   cornerRadius: 'md',
                   paddingStart: '4px',
@@ -364,8 +364,7 @@ function initSenderMode() {
                 {
                   type: 'icon',
                   url: 'https://yjkai.github.io/line-prank/chevron_icon.png',
-                  size: 'xs',
-                  flex: 0
+                  size: 'xs'
                 }
               ]
             }
