@@ -214,9 +214,9 @@ function initSenderMode() {
         size: 'mega',
         hero: {
           type: 'image',
-          url: headerImageUrl || 'https://images.unsplash.com/photo-1513151233558-d860c5398176?auto=format&fit=crop&q=80&w=600',
+          url: headerImageUrl || 'https://yjkai.github.io/line-prank/justforyou.png',
           size: 'full',
-          aspectRatio: '1.06:1',
+          aspectRatio: '106:100',
           aspectMode: 'cover'
         },
         body: {
@@ -348,7 +348,7 @@ function initSenderMode() {
                   contents: [
                     {
                       type: 'icon',
-                      url: 'https://img.icons8.com/color/48/000000/gift--v1.png',
+                      url: 'https://yjkai.github.io/line-prank/gift_icon.png',
                       size: 'md'
                     },
                     {
@@ -363,7 +363,7 @@ function initSenderMode() {
                 },
                 {
                   type: 'icon',
-                  url: 'https://img.icons8.com/ios-glyphs/30/cccccc/chevron-right.png',
+                  url: 'https://yjkai.github.io/line-prank/chevron_icon.png',
                   size: 'xs',
                   flex: 0
                 }
