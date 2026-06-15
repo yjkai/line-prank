@@ -5,7 +5,17 @@
 
 // ==================== CONFIGURATION (設定區) ====================
 // 請在此填寫您在 LINE Developers Console 申請的 LIFF ID
-const LIFF_ID = '2010405195-O4nJcnXp'; 
+// 1. 送禮者 LIFF ID (建議在 LINE Console 設為 Full 或 Tall，方便編輯卡片與設定)
+const SENDER_LIFF_ID = '2010405195-O4nJcnXp'; 
+// 2. 收禮者 LIFF ID (建議在 LINE Console 中新增一個設為 Compact 且 URL 相同的 LIFF，並將 ID 填在此。若留空則使用與送禮者相同的 ID)
+const RECEIVER_LIFF_ID = ''; 
+
+// 根據模式自動決定載入時初始化的 ID
+const isReceiverModeActive = new URLSearchParams(window.location.search).get('auto') === 'yes';
+const LIFF_ID = (isReceiverModeActive && RECEIVER_LIFF_ID) ? RECEIVER_LIFF_ID : SENDER_LIFF_ID;
+// 產生卡片連結時使用的收禮者 ID
+const TARGET_LIFF_ID = RECEIVER_LIFF_ID || SENDER_LIFF_ID;
+
 
 // 預設禮物卡片樣式資料庫 (使用高品質 Unsplash 免費圖庫)
 const GIFT_TEMPLATES = {
@@ -143,7 +153,7 @@ function initSenderMode() {
               cardTitle = GIFT_TEMPLATES[activeTemplate].title;
             }
             const encodedPrankText = encodeURIComponent(inputPrankText.value.trim() || '測試');
-            const targetLiffUrl = `https://liff.line.me/${LIFF_ID}?auto=yes&text=${encodedPrankText}`;
+            const targetLiffUrl = `https://liff.line.me/${TARGET_LIFF_ID}?auto=yes&text=${encodedPrankText}`;
             
             sendDiagnosticMessage([
               {
@@ -327,8 +337,8 @@ function initSenderMode() {
 
     // 核心：編譯收禮者點擊時開啟的 LIFF 連結，並進行 URL 編碼以傳遞 prank text
     const encodedPrankText = encodeURIComponent(prankVal);
-    // 我們將指向同一個 LIFF App，並帶上參數
-    const targetLiffUrl = `https://liff.line.me/${LIFF_ID}?auto=yes&text=${encodedPrankText}`;
+    // 我們將指向對應的 LIFF App，並帶上參數
+    const targetLiffUrl = `https://liff.line.me/${TARGET_LIFF_ID}?auto=yes&text=${encodedPrankText}`;
 
     // 建立高度逼真且符合最新規格的 LINE 官方禮物 Flex Message Payload
     const flexPayload = {
