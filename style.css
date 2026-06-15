@@ -388,117 +388,19 @@ body {
   user-select: none;
 }
 
-/* Mock Card Header */
-.card-header {
+/* Mock Card Header Image Wrapper */
+.card-header-wrapper {
+  width: 100%;
+  aspect-ratio: 1.06 / 1;
+  overflow: hidden;
   background-color: var(--accent-yellow);
-  padding: 16px;
-  position: relative;
-  min-height: 120px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
 }
 
-.header-title {
-  color: #ff3e6c;
-  font-size: 1.15rem;
-  font-weight: 800;
-  line-height: 1.4;
-  z-index: 2;
-  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.4);
-}
-
-.header-footer {
-  font-size: 0.55rem;
-  color: rgba(17, 17, 17, 0.3);
-  z-index: 2;
-  margin-top: 15px;
-}
-
-/* CSS Sallie Mascot Drawing */
-.header-character {
-  position: absolute;
-  right: 15px;
-  bottom: 0;
-  width: 90px;
-  height: 90px;
-  z-index: 1;
-}
-
-.sallie-mock {
-  position: relative;
+.card-header-img {
   width: 100%;
   height: 100%;
-}
-
-.sallie-head {
-  position: absolute;
-  bottom: 0;
-  right: 5px;
-  width: 70px;
-  height: 70px;
-  background-color: #ffd400;
-  border-radius: 50% 50% 10px 10px;
-  border: 1.5px solid #111;
-  position: relative;
-  overflow: hidden;
-}
-
-/* Sallie eyes and mouth */
-.sallie-head::before {
-  content: '';
-  position: absolute;
-  top: 25px;
-  left: 20px;
-  width: 5px;
-  height: 5px;
-  background: #111;
-  border-radius: 50%;
-  box-shadow: 20px 0 0 #111;
-}
-
-.sallie-head::after {
-  content: '';
-  position: absolute;
-  top: 30px;
-  left: 28px;
-  width: 12px;
-  height: 9px;
-  background: #ff7f00;
-  border-radius: 12px 12px 0 0;
-  border: 1.5px solid #111;
-}
-
-.sallie-cup {
-  position: absolute;
-  bottom: 0;
-  left: 5px;
-  width: 35px;
-  height: 40px;
-  background: rgba(255, 255, 255, 0.85);
-  border: 1.5px solid #111;
-  border-radius: 2px 2px 8px 8px;
-  box-shadow: 1px 1px 3px rgba(0,0,0,0.1);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.sallie-cup::before {
-  content: '';
-  position: absolute;
-  top: -8px;
-  left: 14px;
-  width: 4px;
-  height: 12px;
-  background: #795548;
-  transform: rotate(-15deg);
-  border-radius: 2px;
-}
-
-.sallie-cup::after {
-  content: '🧋';
-  font-size: 1rem;
+  object-fit: cover;
+  display: block;
 }
 
 /* Mock Card Body */
@@ -561,6 +463,7 @@ body {
   font-size: 0.75rem;
   color: var(--mock-text-dark);
   line-height: 1.4;
+  text-decoration: underline;
 }
 
 .card-buttons {
@@ -589,6 +492,20 @@ body {
 
 .btn-mock-primary {
   background-color: #ededed;
+}
+
+.btn-mock-link {
+  background-color: transparent;
+  color: var(--mock-text-dark);
+  border: none;
+  font-weight: normal;
+  text-decoration: none;
+  padding: 8px;
+}
+
+.btn-mock-link:hover {
+  background-color: transparent;
+  text-decoration: underline;
 }
 
 /* Mock Card Footer */

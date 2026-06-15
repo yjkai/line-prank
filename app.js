@@ -9,26 +9,20 @@ const LIFF_ID = '2010405195-O4nJcnXp';
 
 // 預設禮物卡片樣式資料庫 (使用高品質 Unsplash 免費圖庫)
 const GIFT_TEMPLATES = {
+  lovepoint: {
+    title: '【愛情滿分就差這1點：樂成宮月老給你1點脫單力】用LINE POINTS 1點為好友的戀情助攻，一起兌換好禮機會！',
+    image: 'https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&q=80&w=300',
+    headerImage: 'https://images.unsplash.com/photo-1579546929518-9e396f3cc809?auto=format&fit=crop&q=80&w=600'
+  },
   starbucks: {
     title: '【星巴克】特大杯巧克力可可碎片星冰樂雙杯組',
     image: 'https://images.unsplash.com/photo-1572490122747-3968b75cc699?auto=format&fit=crop&q=80&w=300',
-    headerText: '0430世界珍奶日\n你值得來喝一杯 🧋',
-    headerBg: '#FFE646',
-    headerColor: '#FF3E6C'
+    headerImage: 'https://images.unsplash.com/photo-1579546929518-9e396f3cc809?auto=format&fit=crop&q=80&w=600'
   },
   brownsugar: {
     title: '生活來點甜【7-ELEVEN】冰黑糖珍珠撞奶(大)好禮即享券',
     image: 'https://images.unsplash.com/photo-1541658016709-82535e94bc69?auto=format&fit=crop&q=80&w=300',
-    headerText: '熱銷推薦\n珍珠撞奶大杯享樂 🧋',
-    headerBg: '#FFE646',
-    headerColor: '#FF3E6C'
-  },
-  mcdonalds: {
-    title: '【麥當勞】麥香雞 + 冰檸檬紅茶(中) 即享券',
-    image: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&q=80&w=300',
-    headerText: '歡慶時刻\n經典美味即刻享用 🍔',
-    headerBg: '#FFE646',
-    headerColor: '#FF3E6C'
+    headerImage: 'https://images.unsplash.com/photo-1579546929518-9e396f3cc809?auto=format&fit=crop&q=80&w=600'
   }
 };
 
@@ -61,7 +55,7 @@ function initSenderMode() {
   
   const inputPrankText = document.getElementById('prank-text');
   const selectTemplate = document.getElementById('gift-template');
-  const inputCardHeader = document.getElementById('card-header-text');
+  const inputCardHeaderImage = document.getElementById('card-header-image');
   const btnSend = document.getElementById('btn-send');
   
   const customGiftFields = document.getElementById('custom-gift-fields');
@@ -69,8 +63,7 @@ function initSenderMode() {
   const inputCustomImage = document.getElementById('custom-image');
   
   // 即時預覽 UI 元素
-  const previewHeader = document.getElementById('preview-header');
-  const previewHeaderText = document.getElementById('preview-header-text');
+  const previewHeaderImg = document.getElementById('preview-header-img');
   const previewImage = document.getElementById('preview-image');
   const previewTitle = document.getElementById('preview-title');
 
@@ -119,7 +112,7 @@ function initSenderMode() {
     const activeTemplate = selectTemplate.value;
     let cardTitle = '';
     let cardImage = '';
-    let headerText = inputCardHeader.value;
+    let headerImageUrl = inputCardHeaderImage.value;
 
     if (activeTemplate === 'custom') {
       cardTitle = inputCustomTitle.value || '自訂禮物商品名稱';
@@ -130,15 +123,15 @@ function initSenderMode() {
       cardImage = templateData.image;
     }
 
-    // 渲染預覽網頁內容 (用 <br> 替換換行符號)
-    previewHeaderText.innerHTML = headerText.replace(/\n/g, '<br>');
+    // 渲染預覽網頁內容
+    previewHeaderImg.src = headerImageUrl || 'https://images.unsplash.com/photo-1513151233558-d860c5398176?auto=format&fit=crop&q=80&w=600';
     previewImage.src = cardImage;
     previewTitle.textContent = cardTitle;
   }
 
   // 綁定表單變更監聽器，達到即時預覽效果
   inputPrankText.addEventListener('input', updatePreview);
-  inputCardHeader.addEventListener('input', updatePreview);
+  inputCardHeaderImage.addEventListener('input', updatePreview);
   inputCustomTitle.addEventListener('input', updatePreview);
   inputCustomImage.addEventListener('input', updatePreview);
   
@@ -149,7 +142,7 @@ function initSenderMode() {
       customGiftFields.classList.add('hidden');
       // 將預設標題與圖片載入表單 (以防用戶修改)
       const data = GIFT_TEMPLATES[selectTemplate.value];
-      inputCardHeader.value = data.headerText;
+      inputCardHeaderImage.value = data.headerImage;
     }
     updatePreview();
   });
@@ -163,6 +156,10 @@ function initSenderMode() {
   });
 
   // 初始化首次預覽
+  const initialData = GIFT_TEMPLATES[selectTemplate.value];
+  if (initialData) {
+    inputCardHeaderImage.value = initialData.headerImage;
+  }
   updatePreview();
 
   // 處理發送禮物邏輯 (呼叫 shareTargetPicker)
@@ -188,7 +185,7 @@ function initSenderMode() {
     const activeTemplate = selectTemplate.value;
     let cardTitle = '';
     let cardImage = '';
-    let headerText = inputCardHeader.value;
+    let headerImageUrl = inputCardHeaderImage.value.trim();
 
     if (activeTemplate === 'custom') {
       cardTitle = inputCustomTitle.value.trim() || '自訂禮物商品';
@@ -204,35 +201,19 @@ function initSenderMode() {
     // 我們將指向同一個 LIFF App，並帶上參數
     const targetLiffUrl = `https://liff.line.me/${LIFF_ID}?auto=yes&text=${encodedPrankText}`;
 
-    // 建立高度逼真的 LINE 官方禮物 Flex Message Payload
+    // 建立高度逼真且符合最新規格的 LINE 官方禮物 Flex Message Payload
     const flexPayload = {
       type: 'flex',
       altText: `[LINE 禮物] 送給您一張好禮即享券！`,
       contents: {
         type: 'bubble',
         size: 'mega',
-        header: {
-          type: 'box',
-          layout: 'vertical',
-          backgroundColor: '#FFE646',
-          paddingAll: '16px',
-          contents: [
-            {
-              type: 'text',
-              text: headerText,
-              color: '#FF3E6C',
-              weight: 'bold',
-              size: 'lg',
-              wrap: true
-            },
-            {
-              type: 'text',
-              text: '© LY Corp.',
-              color: '#888888',
-              size: 'xxs',
-              margin: 'md'
-            }
-          ]
+        hero: {
+          type: 'image',
+          url: headerImageUrl || 'https://images.unsplash.com/photo-1513151233558-d860c5398176?auto=format&fit=crop&q=80&w=600',
+          size: 'full',
+          aspectRatio: '1.06:1',
+          aspectMode: 'cover'
         },
         body: {
           type: 'box',
@@ -296,7 +277,8 @@ function initSenderMode() {
                   text: '您收到的禮物有機會獲得活動驚喜好禮喔，快來看看吧！',
                   size: 'xs',
                   color: '#111111',
-                  wrap: true
+                  wrap: true,
+                  decoration: 'underline'
                 }
               ]
             },
@@ -314,7 +296,7 @@ function initSenderMode() {
                     uri: targetLiffUrl
                   },
                   style: 'secondary',
-                  color: '#EDEDED',
+                  color: '#F5F5F5',
                   height: 'sm'
                 },
                 {
@@ -335,8 +317,8 @@ function initSenderMode() {
                     label: '傳送感謝小卡',
                     uri: 'https://gift.line.me'
                   },
-                  style: 'secondary',
-                  color: '#F5F5F5',
+                  style: 'link',
+                  color: '#111111',
                   height: 'sm'
                 }
               ]
@@ -345,33 +327,43 @@ function initSenderMode() {
         },
         footer: {
           type: 'box',
-          layout: 'horizontal',
+          layout: 'vertical',
           contents: [
+            {
+              type: 'separator'
+            },
             {
               type: 'box',
               layout: 'horizontal',
-              flex: 1,
+              paddingTop: '12px',
               contents: [
                 {
-                  type: 'icon',
-                  url: 'https://img.icons8.com/color/48/000000/gift--v1.png',
-                  size: 'md'
+                  type: 'box',
+                  layout: 'horizontal',
+                  flex: 1,
+                  contents: [
+                    {
+                      type: 'icon',
+                      url: 'https://img.icons8.com/color/48/000000/gift--v1.png',
+                      size: 'md'
+                    },
+                    {
+                      type: 'text',
+                      text: 'LINE 禮物',
+                      size: 'xs',
+                      color: '#888888',
+                      margin: 'xs',
+                      weight: 'bold'
+                    }
+                  ]
                 },
                 {
-                  type: 'text',
-                  text: 'LINE 禮物',
+                  type: 'icon',
+                  url: 'https://img.icons8.com/ios-glyphs/30/cccccc/chevron-right.png',
                   size: 'xs',
-                  color: '#666666',
-                  margin: 'xs',
-                  weight: 'bold'
+                  flex: 0
                 }
               ]
-            },
-            {
-              type: 'icon',
-              url: 'https://img.icons8.com/ios-glyphs/30/cccccc/chevron-right.png',
-              size: 'xs',
-              flex: 0
             }
           ]
         }

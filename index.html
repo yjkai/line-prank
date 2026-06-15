@@ -71,9 +71,9 @@
           <div class="form-group">
             <label for="gift-template"><i class="fa-solid fa-tags"></i> 選擇禮物範本</label>
             <select id="gift-template">
+              <option value="lovepoint">【月老脫單】樂成宮月老給你1點脫單力</option>
               <option value="starbucks">【星巴克】特大杯巧克力可可碎片星冰樂雙杯組</option>
               <option value="brownsugar">【7-ELEVEN】冰黑糖珍珠撞奶(大)好禮即享券</option>
-              <option value="mcdonalds">【麥當勞】麥香雞 + 冰檸檬紅茶(中) 即享券</option>
               <option value="custom">自訂禮物內容 (自訂標題與圖片)</option>
             </select>
           </div>
@@ -91,9 +91,8 @@
           </div>
 
           <div class="form-group">
-            <label for="card-header-text"><i class="fa-solid fa-heading"></i> 卡片頂部節日標題</label>
-            <textarea id="card-header-text" rows="2">0430世界珍奶日
-你值得來喝一杯 🧋</textarea>
+            <label for="card-header-image"><i class="fa-solid fa-image"></i> 卡片頂部橫幅圖片 URL</label>
+            <input type="url" id="card-header-image" placeholder="請輸入頂部橫幅圖片 URL">
           </div>
 
           <button id="btn-send" class="btn btn-primary btn-send-gift">
@@ -108,16 +107,9 @@
           <div class="flex-message-mock">
             <!-- 仿 LINE 官方 Flex Message 卡片 -->
             <div class="mock-card">
-              <!-- 卡片頂部：黃色背景 + 節日標題 -->
-              <div id="preview-header" class="card-header">
-                <div id="preview-header-text" class="header-title">0430世界珍奶日<br>你值得來喝一杯 🧋</div>
-                <div class="header-character">
-                  <div class="sallie-mock">
-                    <div class="sallie-head"></div>
-                    <div class="sallie-cup"></div>
-                  </div>
-                </div>
-                <div class="header-footer">© LY Corp.</div>
+              <!-- 卡片頂部：大張橫幅圖片 -->
+              <div class="card-header-wrapper">
+                <img id="preview-header-img" src="" alt="卡片橫幅" class="card-header-img">
               </div>
 
               <!-- 卡片主體 -->
@@ -137,7 +129,7 @@
                 <div class="card-buttons">
                   <button class="btn-mock btn-mock-primary">打開我的禮物</button>
                   <button class="btn-mock">挑選感謝禮物</button>
-                  <button class="btn-mock">傳送感謝小卡</button>
+                  <button class="btn-mock btn-mock-link">傳送感謝小卡</button>
                 </div>
               </div>
 
