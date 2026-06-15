@@ -333,14 +333,14 @@ function initSenderMode() {
     // 建立高度逼真且符合最新規格的 LINE 官方禮物 Flex Message Payload
     const flexPayload = {
       type: 'flex',
-      altText: `[LINE 禮物] 送給您一張好禮即享券！`,
+      altText: '[LINE 禮物] 送給您一張好禮即享券！',
       contents: {
         type: 'bubble',
         hero: {
           type: 'image',
           url: headerImageUrl || 'https://yjkai.github.io/line-prank/justforyou.png',
           size: 'full',
-          aspectRatio: '1:1',
+          aspectRatio: '20:13',
           aspectMode: 'cover',
           action: {
             type: 'uri',
@@ -362,8 +362,7 @@ function initSenderMode() {
                   size: 'md',
                   aspectRatio: '1:1',
                   aspectMode: 'cover',
-                  flex: 0,
-                  cornerRadius: 'md'
+                  flex: 0
                 },
                 {
                   type: 'text',
@@ -375,6 +374,10 @@ function initSenderMode() {
                   gravity: 'center'
                 }
               ]
+            },
+            {
+              type: 'separator',
+              margin: 'lg'
             },
             {
               type: 'box',
@@ -408,8 +411,8 @@ function initSenderMode() {
           contents: [
             {
               type: 'button',
-              style: 'primary',
-              color: '#06c755',
+              style: 'secondary',
+              height: 'sm',
               action: {
                 type: 'uri',
                 label: '打開我的禮物',
@@ -419,6 +422,7 @@ function initSenderMode() {
             {
               type: 'button',
               style: 'secondary',
+              height: 'sm',
               action: {
                 type: 'uri',
                 label: '挑選感謝禮物',
@@ -428,6 +432,7 @@ function initSenderMode() {
             {
               type: 'button',
               style: 'link',
+              height: 'sm',
               action: {
                 type: 'uri',
                 label: '傳送感謝小卡',
@@ -436,14 +441,12 @@ function initSenderMode() {
             },
             {
               type: 'separator',
-              margin: 'md',
-              color: '#e5e5e5'
+              margin: 'sm'
             },
             {
               type: 'box',
               layout: 'horizontal',
-              margin: 'md',
-              spacing: 'sm',
+              margin: 'sm',
               contents: [
                 {
                   type: 'image',
