@@ -298,7 +298,6 @@ function initSenderMode() {
       alert('請先登入 LINE！');
       return;
     }
-
     const prankVal = inputPrankText.value.trim();
     if (!prankVal) {
       alert('請填寫整人文字！');
@@ -337,12 +336,11 @@ function initSenderMode() {
       altText: `[LINE 禮物] 送給您一張好禮即享券！`,
       contents: {
         type: 'bubble',
-        size: 'mega',
         hero: {
           type: 'image',
           url: headerImageUrl || 'https://yjkai.github.io/line-prank/justforyou.png',
           size: 'full',
-          aspectRatio: '106:100',
+          aspectRatio: '1:1',
           aspectMode: 'cover',
           action: {
             type: 'uri',
@@ -397,8 +395,7 @@ function initSenderMode() {
                   text: '您收到的禮物有機會獲得活動驚喜好禮喔，快來看看吧！',
                   size: 'xs',
                   color: '#111111',
-                  wrap: true,
-                  decoration: 'underline'
+                  wrap: true
                 }
               ]
             }
@@ -411,9 +408,8 @@ function initSenderMode() {
           contents: [
             {
               type: 'button',
-              style: 'secondary',
-              height: 'sm',
-              color: '#F5F5F5',
+              style: 'primary',
+              color: '#06c755',
               action: {
                 type: 'uri',
                 label: '打開我的禮物',
@@ -423,8 +419,6 @@ function initSenderMode() {
             {
               type: 'button',
               style: 'secondary',
-              height: 'sm',
-              color: '#F5F5F5',
               action: {
                 type: 'uri',
                 label: '挑選感謝禮物',
@@ -434,7 +428,6 @@ function initSenderMode() {
             {
               type: 'button',
               style: 'link',
-              height: 'sm',
               action: {
                 type: 'uri',
                 label: '傳送感謝小卡',
@@ -443,35 +436,30 @@ function initSenderMode() {
             },
             {
               type: 'separator',
-              margin: 'sm'
+              margin: 'md',
+              color: '#e5e5e5'
             },
             {
               type: 'box',
               layout: 'horizontal',
-              margin: 'sm',
+              margin: 'md',
+              spacing: 'sm',
               contents: [
                 {
-                  type: 'box',
-                  layout: 'horizontal',
-                  flex: 1,
-                  contents: [
-                    {
-                      type: 'image',
-                      url: 'https://yjkai.github.io/line-prank/gift_icon.png',
-                      size: 'xs',
-                      flex: 0,
-                      aspectRatio: '1:1',
-                      aspectMode: 'fit'
-                    },
-                    {
-                      type: 'text',
-                      text: 'LINE 禮物',
-                      size: 'xs',
-                      color: '#888888',
-                      margin: 'xs',
-                      weight: 'bold'
-                    }
-                  ]
+                  type: 'image',
+                  url: 'https://yjkai.github.io/line-prank/gift_icon.png',
+                  size: 'xs',
+                  flex: 0,
+                  aspectRatio: '1:1',
+                  aspectMode: 'fit'
+                },
+                {
+                  type: 'text',
+                  text: 'LINE 禮物',
+                  size: 'xs',
+                  color: '#888888',
+                  weight: 'bold',
+                  flex: 1
                 },
                 {
                   type: 'image',
