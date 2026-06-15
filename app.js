@@ -354,7 +354,7 @@ function initSenderMode() {
             {
               type: 'box',
               layout: 'horizontal',
-              spacing: 'md',
+              spacing: 'lg',
               contents: [
                 {
                   type: 'image',
@@ -368,7 +368,7 @@ function initSenderMode() {
                   type: 'text',
                   text: cardTitle,
                   weight: 'bold',
-                  size: 'sm',
+                  size: 'md',
                   wrap: true,
                   color: '#111111',
                   gravity: 'center'
@@ -382,13 +382,13 @@ function initSenderMode() {
             {
               type: 'box',
               layout: 'horizontal',
-              margin: 'md',
+              margin: 'lg',
               spacing: 'sm',
               contents: [
                 {
                   type: 'text',
                   text: '驚喜活動',
-                  size: 'xs',
+                  size: 'sm',
                   color: '#888888',
                   weight: 'bold',
                   flex: 0
@@ -396,9 +396,10 @@ function initSenderMode() {
                 {
                   type: 'text',
                   text: '您收到的禮物有機會獲得活動驚喜好禮喔，快來看看吧！',
-                  size: 'xs',
+                  size: 'sm',
                   color: '#111111',
-                  wrap: true
+                  wrap: true,
+                  decoration: 'underline'
                 }
               ]
             }
@@ -413,6 +414,7 @@ function initSenderMode() {
               type: 'button',
               style: 'secondary',
               height: 'sm',
+              color: '#f5f5f5',
               action: {
                 type: 'uri',
                 label: '打開我的禮物',
@@ -423,6 +425,7 @@ function initSenderMode() {
               type: 'button',
               style: 'secondary',
               height: 'sm',
+              color: '#f5f5f5',
               action: {
                 type: 'uri',
                 label: '挑選感謝禮物',
@@ -433,6 +436,7 @@ function initSenderMode() {
               type: 'button',
               style: 'link',
               height: 'sm',
+              color: '#466b9d',
               action: {
                 type: 'uri',
                 label: '傳送感謝小卡',
@@ -441,17 +445,17 @@ function initSenderMode() {
             },
             {
               type: 'separator',
-              margin: 'sm'
+              margin: 'md'
             },
             {
               type: 'box',
               layout: 'horizontal',
-              margin: 'sm',
+              margin: 'md',
               contents: [
                 {
                   type: 'image',
-                  url: 'https://yjkai.github.io/line-prank/gift_icon.png',
-                  size: 'xs',
+                  url: 'https://yjkai.github.io/line-prank/gift_icon_green.png',
+                  size: 'xxs',
                   flex: 0,
                   aspectRatio: '1:1',
                   aspectMode: 'fit'
@@ -460,17 +464,20 @@ function initSenderMode() {
                   type: 'text',
                   text: 'LINE 禮物',
                   size: 'xs',
-                  color: '#888888',
+                  color: '#b3b3b3',
                   weight: 'bold',
-                  flex: 1
+                  flex: 1,
+                  margin: 'md',
+                  gravity: 'center'
                 },
                 {
                   type: 'image',
                   url: 'https://yjkai.github.io/line-prank/chevron_icon.png',
-                  size: 'xs',
+                  size: 'xxs',
                   flex: 0,
                   aspectRatio: '1:1',
-                  aspectMode: 'fit'
+                  aspectMode: 'fit',
+                  gravity: 'center'
                 }
               ]
             }
