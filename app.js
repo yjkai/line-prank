@@ -228,10 +228,9 @@ function initSenderMode() {
             {
               type: 'text',
               text: '© LY Corp.',
-              color: '#111111',
+              color: '#888888',
               size: 'xxs',
-              margin: 'md',
-              opacity: 0.4
+              margin: 'md'
             }
           ]
         },
@@ -274,17 +273,23 @@ function initSenderMode() {
               spacing: 'xs',
               contents: [
                 {
-                  type: 'text',
-                  text: '驚喜活動',
-                  size: 'xs',
-                  color: '#666666',
-                  weight: 'bold',
+                  type: 'box',
+                  layout: 'vertical',
                   borderWidth: '1px',
                   borderColor: '#DDDDDD',
-                  borderRadius: 'md',
+                  cornerRadius: 'md',
                   paddingStart: '4px',
                   paddingEnd: '4px',
-                  flex: 0
+                  flex: 0,
+                  contents: [
+                    {
+                      type: 'text',
+                      text: '驚喜活動',
+                      size: 'xs',
+                      color: '#666666',
+                      weight: 'bold'
+                    }
+                  ]
                 },
                 {
                   type: 'text',
@@ -341,12 +346,11 @@ function initSenderMode() {
         footer: {
           type: 'box',
           layout: 'horizontal',
-          borderColor: '#F0F0F0',
-          borderWidth: '1px',
           contents: [
             {
               type: 'box',
               layout: 'horizontal',
+              flex: 1,
               contents: [
                 {
                   type: 'icon',
@@ -366,7 +370,8 @@ function initSenderMode() {
             {
               type: 'icon',
               url: 'https://img.icons8.com/ios-glyphs/30/cccccc/chevron-right.png',
-              size: 'xs'
+              size: 'xs',
+              flex: 0
             }
           ]
         }
