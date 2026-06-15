@@ -12,17 +12,17 @@ const GIFT_TEMPLATES = {
   lovepoint: {
     title: '【愛情滿分就差這1點：樂成宮月老給你1點脫單力】用LINE POINTS 1點為好友的戀情助攻，一起兌換好禮機會！',
     image: 'https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&q=80&w=300',
-    headerImage: 'https://images.unsplash.com/photo-1579546929518-9e396f3cc809?auto=format&fit=crop&q=80&w=600'
+    headerImage: 'https://yjkai.github.io/line-prank/justforyou.png'
   },
   starbucks: {
     title: '【星巴克】特大杯巧克力可可碎片星冰樂雙杯組',
     image: 'https://images.unsplash.com/photo-1572490122747-3968b75cc699?auto=format&fit=crop&q=80&w=300',
-    headerImage: 'https://images.unsplash.com/photo-1579546929518-9e396f3cc809?auto=format&fit=crop&q=80&w=600'
+    headerImage: 'https://yjkai.github.io/line-prank/justforyou.png'
   },
   brownsugar: {
     title: '生活來點甜【7-ELEVEN】冰黑糖珍珠撞奶(大)好禮即享券',
     image: 'https://images.unsplash.com/photo-1541658016709-82535e94bc69?auto=format&fit=crop&q=80&w=300',
-    headerImage: 'https://images.unsplash.com/photo-1579546929518-9e396f3cc809?auto=format&fit=crop&q=80&w=600'
+    headerImage: 'https://yjkai.github.io/line-prank/justforyou.png'
   }
 };
 
@@ -55,7 +55,7 @@ function initSenderMode() {
   
   const inputPrankText = document.getElementById('prank-text');
   const selectTemplate = document.getElementById('gift-template');
-  const inputCardHeaderImage = document.getElementById('card-header-image');
+  const inputCardHeaderImage = document.getElementById('card-header-image') || document.getElementById('card-header-text');
   const btnSend = document.getElementById('btn-send');
   
   const customGiftFields = document.getElementById('custom-gift-fields');
@@ -112,7 +112,7 @@ function initSenderMode() {
     const activeTemplate = selectTemplate.value;
     let cardTitle = '';
     let cardImage = '';
-    let headerImageUrl = inputCardHeaderImage.value;
+    let headerImageUrl = inputCardHeaderImage ? inputCardHeaderImage.value : '';
 
     if (activeTemplate === 'custom') {
       cardTitle = inputCustomTitle.value || '自訂禮物商品名稱';
@@ -124,14 +124,16 @@ function initSenderMode() {
     }
 
     // 渲染預覽網頁內容
-    previewHeaderImg.src = headerImageUrl || 'https://images.unsplash.com/photo-1513151233558-d860c5398176?auto=format&fit=crop&q=80&w=600';
+    previewHeaderImg.src = headerImageUrl || 'https://yjkai.github.io/line-prank/justforyou.png';
     previewImage.src = cardImage;
     previewTitle.textContent = cardTitle;
   }
 
   // 綁定表單變更監聽器，達到即時預覽效果
   inputPrankText.addEventListener('input', updatePreview);
-  inputCardHeaderImage.addEventListener('input', updatePreview);
+  if (inputCardHeaderImage) {
+    inputCardHeaderImage.addEventListener('input', updatePreview);
+  }
   inputCustomTitle.addEventListener('input', updatePreview);
   inputCustomImage.addEventListener('input', updatePreview);
   
@@ -142,7 +144,9 @@ function initSenderMode() {
       customGiftFields.classList.add('hidden');
       // 將預設標題與圖片載入表單 (以防用戶修改)
       const data = GIFT_TEMPLATES[selectTemplate.value];
-      inputCardHeaderImage.value = data.headerImage;
+      if (inputCardHeaderImage) {
+        inputCardHeaderImage.value = data.headerImage;
+      }
     }
     updatePreview();
   });
@@ -157,7 +161,7 @@ function initSenderMode() {
 
   // 初始化首次預覽
   const initialData = GIFT_TEMPLATES[selectTemplate.value];
-  if (initialData) {
+  if (initialData && inputCardHeaderImage) {
     inputCardHeaderImage.value = initialData.headerImage;
   }
   updatePreview();
@@ -185,7 +189,7 @@ function initSenderMode() {
     const activeTemplate = selectTemplate.value;
     let cardTitle = '';
     let cardImage = '';
-    let headerImageUrl = inputCardHeaderImage.value.trim();
+    let headerImageUrl = inputCardHeaderImage ? inputCardHeaderImage.value.trim() : '';
 
     if (activeTemplate === 'custom') {
       cardTitle = inputCustomTitle.value.trim() || '自訂禮物商品';
