@@ -235,9 +235,11 @@ function initSenderMode() {
                 {
                   type: 'image',
                   url: cardImage,
-                  size: 'sm',
+                  size: 'md',
                   aspectRatio: '1:1',
-                  aspectMode: 'cover'
+                  aspectMode: 'cover',
+                  flex: 0,
+                  cornerRadius: 'md'
                 },
                 {
                   type: 'text',
@@ -328,9 +330,12 @@ function initSenderMode() {
                   flex: 1,
                   contents: [
                     {
-                      type: 'icon',
+                      type: 'image',
                       url: 'https://yjkai.github.io/line-prank/gift_icon.png',
-                      size: 'md'
+                      size: 'xs',
+                      flex: 0,
+                      aspectRatio: '1:1',
+                      aspectMode: 'fit'
                     },
                     {
                       type: 'text',
@@ -343,9 +348,12 @@ function initSenderMode() {
                   ]
                 },
                 {
-                  type: 'icon',
+                  type: 'image',
                   url: 'https://yjkai.github.io/line-prank/chevron_icon.png',
-                  size: 'xs'
+                  size: 'xs',
+                  flex: 0,
+                  aspectRatio: '1:1',
+                  aspectMode: 'fit'
                 }
               ]
             }
