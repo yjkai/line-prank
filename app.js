@@ -90,6 +90,69 @@ function initSenderMode() {
           
         // 綁定送禮按鈕
         btnSend.addEventListener('click', handleSendGift);
+
+        // 綁定診斷按鈕
+        const btnTestText = document.getElementById('btn-send-test-text');
+        const btnTestFlex = document.getElementById('btn-send-test-simple-flex');
+        const diagLog = document.getElementById('diagnostic-log');
+
+        if (btnTestText) {
+          btnTestText.addEventListener('click', () => {
+            sendDiagnosticMessage([
+              {
+                type: 'text',
+                text: '【LINE 禮物測試】這是一封診斷測試純文字訊息。如果看到這行，代表您的 LIFF 傳送功能本身是正常的！'
+              }
+            ], '純文字測試');
+          });
+        }
+
+        if (btnTestFlex) {
+          btnTestFlex.addEventListener('click', () => {
+            sendDiagnosticMessage([
+              {
+                type: 'flex',
+                altText: '【LINE 禮物測試】極簡 Flex 測試訊息',
+                contents: {
+                  type: 'bubble',
+                  body: {
+                    type: 'box',
+                    layout: 'vertical',
+                    contents: [
+                      {
+                        type: 'text',
+                        text: '【極簡 Flex 測試】如果看到這行，代表您的 Channel 傳送 Flex 訊息功能正常！',
+                        wrap: true
+                      }
+                    ]
+                  }
+                }
+              }
+            ], '極簡 Flex 測試');
+          });
+        }
+
+        function sendDiagnosticMessage(payload, testName) {
+          diagLog.style.display = 'block';
+          diagLog.textContent = `[${testName}] 正在啟動好友選取器...`;
+          
+          if (!liff.isApiAvailable('shareTargetPicker')) {
+            diagLog.textContent = `[${testName}] 錯誤：此環境不支援 shareTargetPicker。請在 LINE App 內開啟連結！`;
+            return;
+          }
+
+          liff.shareTargetPicker(payload)
+            .then(res => {
+              if (res) {
+                diagLog.textContent = `[${testName}] 送出成功！\n回傳結果: ${JSON.stringify(res)}\n請至對應的聊天室確認是否收到訊息。`;
+              } else {
+                diagLog.textContent = `[${testName}] 使用者取消了發送。`;
+              }
+            })
+            .catch(err => {
+              diagLog.textContent = `[${testName}] 發送出錯！\n錯誤代碼/訊息: ${err.message || err.toString()}`;
+            });
+        }
       }
     })
     .catch(err => {

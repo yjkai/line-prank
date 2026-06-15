@@ -98,6 +98,20 @@
           <button id="btn-send" class="btn btn-primary btn-send-gift">
             <i class="fa-solid fa-share-nodes"></i> 選擇好友並傳送禮物
           </button>
+
+          <!-- 診斷功能 -->
+          <div class="diagnostic-panel" style="margin-top: 20px; padding-top: 15px; border-top: 1px dashed rgba(255,255,255,0.15);">
+            <p style="font-size: 12px; color: #bbb; margin-bottom: 8px; font-weight: bold;"><i class="fa-solid fa-bug"></i> 診斷功能 (如果發送後好友沒收到，請用此區排查)：</p>
+            <div style="display: flex; gap: 8px; margin-bottom: 8px;">
+              <button id="btn-send-test-text" class="btn" style="flex: 1; font-size: 11px; padding: 8px; background: rgba(255,255,255,0.08); color: #fff; border: 1px solid rgba(255,255,255,0.15); border-radius: 6px; cursor: pointer;">
+                1. 發送純文字測試
+              </button>
+              <button id="btn-send-test-simple-flex" class="btn" style="flex: 1; font-size: 11px; padding: 8px; background: rgba(255,255,255,0.08); color: #fff; border: 1px solid rgba(255,255,255,0.15); border-radius: 6px; cursor: pointer;">
+                2. 發送極簡 Flex 測試
+              </button>
+            </div>
+            <div id="diagnostic-log" style="font-size: 11px; color: #aeffae; word-break: break-all; white-space: pre-wrap; font-family: monospace; padding: 6px; background: rgba(0,0,0,0.2); border-radius: 4px; display: none;"></div>
+          </div>
         </div>
 
         <!-- 右側：即時卡片預覽 -->
