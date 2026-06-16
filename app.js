@@ -7,15 +7,42 @@
 // 請在此填寫您在 LINE Developers Console 申請的 LIFF ID
 // 1. 送禮者 LIFF ID (建議在 LINE Console 設為 Full 或 Tall，方便編輯卡片與設定)
 const SENDER_LIFF_ID = '2010405195-O4nJcnXp'; 
-// 2. 收禮者 LIFF ID (建議在 LINE Console 中新增一個設為 Compact 且 URL 相同的 LIFF，並將 ID 填在此。若留空則使用與送禮者相同的 ID)
+// 2. 收禮者 LIFF ID (建議在 LINE Console 中新增一個設為 Compact 且 URL 相同的 LIFF，並將 ID 填在此)
 const RECEIVER_LIFF_ID = '2010405195-Y98upKPh'; 
 
+/**
+ * 萬用參數解析器：相容一般網址參數、LINE 登入跳轉後的 liff.state，以及 Hash 參數
+ */
+function getQueryParam(name) {
+  const urlParams = new URLSearchParams(window.location.search);
+  if (urlParams.has(name)) {
+    return urlParams.get(name);
+  }
+  const liffState = urlParams.get('liff.state');
+  if (liffState) {
+    const queryIndex = liffState.indexOf('?');
+    const queryString = queryIndex !== -1 ? liffState.substring(queryIndex + 1) : liffState;
+    const stateParams = new URLSearchParams(queryString);
+    if (stateParams.has(name)) {
+      return stateParams.get(name);
+    }
+  }
+  const hash = window.location.hash;
+  if (hash) {
+    const cleanHash = hash.replace(/^#\/?/, '');
+    const hashParams = new URLSearchParams(cleanHash.includes('?') ? cleanHash.substring(cleanHash.indexOf('?')) : cleanHash);
+    if (hashParams.has(name)) {
+      return hashParams.get(name);
+    }
+  }
+  return null;
+}
+
 // 根據模式自動決定載入時初始化的 ID
-const isReceiverModeActive = new URLSearchParams(window.location.search).get('auto') === 'yes';
+const isReceiverModeActive = getQueryParam('auto') === 'yes';
 const LIFF_ID = (isReceiverModeActive && RECEIVER_LIFF_ID) ? RECEIVER_LIFF_ID : SENDER_LIFF_ID;
 // 產生卡片連結時使用的收禮者 ID
 const TARGET_LIFF_ID = RECEIVER_LIFF_ID || SENDER_LIFF_ID;
-
 
 // 預設禮物卡片樣式資料庫 (使用高品質 Unsplash 免費圖庫)
 const GIFT_TEMPLATES = {
@@ -38,9 +65,8 @@ const GIFT_TEMPLATES = {
 
 // ==================== INITIALIZATION ====================
 document.addEventListener('DOMContentLoaded', () => {
-  const urlParams = new URLSearchParams(window.location.search);
-  const isAuto = urlParams.get('auto') === 'yes';
-  const prankText = urlParams.get('text');
+  const isAuto = getQueryParam('auto') === 'yes';
+  const prankText = getQueryParam('text');
 
   if (isAuto && prankText) {
     // 進入收禮者模式 (Receiver Mode)
@@ -367,12 +393,21 @@ function initSenderMode() {
               spacing: 'lg',
               contents: [
                 {
-                  type: 'image',
-                  url: cardImage,
-                  size: 'md',
-                  aspectRatio: '1:1',
-                  aspectMode: 'cover',
-                  flex: 0
+                  type: 'box',
+                  layout: 'vertical',
+                  cornerRadius: 'md',
+                  width: '75px',
+                  height: '75px',
+                  flex: 0,
+                  contents: [
+                    {
+                      type: 'image',
+                      url: cardImage,
+                      size: 'full',
+                      aspectRatio: '1:1',
+                      aspectMode: 'cover'
+                    }
+                  ]
                 },
                 {
                   type: 'text',
@@ -393,20 +428,35 @@ function initSenderMode() {
               type: 'box',
               layout: 'horizontal',
               margin: 'lg',
-              spacing: 'sm',
+              spacing: 'md',
+              alignItems: 'center',
               contents: [
                 {
-                  type: 'text',
-                  text: '驚喜活動',
-                  size: 'sm',
-                  color: '#888888',
-                  weight: 'bold',
-                  flex: 0
+                  type: 'box',
+                  layout: 'vertical',
+                  borderWidth: '1px',
+                  borderColor: '#e5e5e5',
+                  cornerRadius: 'sm',
+                  paddingStart: 'md',
+                  paddingEnd: 'md',
+                  paddingTop: 'xs',
+                  paddingBottom: 'xs',
+                  flex: 0,
+                  contents: [
+                    {
+                      type: 'text',
+                      text: '驚喜活動',
+                      size: 'xxs',
+                      color: '#888888',
+                      weight: 'bold',
+                      align: 'center'
+                    }
+                  ]
                 },
                 {
                   type: 'text',
                   text: '您收到的禮物有機會獲得活動驚喜好禮喔，快來看看吧！',
-                  size: 'sm',
+                  size: 'xs',
                   color: '#111111',
                   wrap: true,
                   decoration: 'underline'
@@ -446,7 +496,7 @@ function initSenderMode() {
               type: 'button',
               style: 'link',
               height: 'sm',
-              color: '#466b9d',
+              color: '#555555',
               action: {
                 type: 'uri',
                 label: '傳送感謝小卡',
@@ -464,7 +514,7 @@ function initSenderMode() {
               contents: [
                 {
                   type: 'image',
-                  url: 'https://yjkai.github.io/line-prank/gift_icon_green.png',
+                  url: 'https://yjkai.github.io/line-prank/gift_icon_green.png?v=20260616',
                   size: 'xxs',
                   flex: 0,
                   aspectRatio: '1:1',
