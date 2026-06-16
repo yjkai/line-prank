@@ -373,6 +373,7 @@ function initSenderMode() {
       altText: `${window._senderDisplayName || 'LINE 用戶'} 送禮物來了，打開看看吧！`,
       contents: {
         type: 'bubble',
+        size: 'kilo',
         hero: {
           type: 'image',
           url: headerImageUrl || 'https://yjkai.github.io/line-prank/justforyou.png',
@@ -432,28 +433,19 @@ function initSenderMode() {
               margin: 'lg',
               spacing: 'md',
               alignItems: 'center',
+              action: {
+                type: 'uri',
+                label: '驚喜活動',
+                uri: targetLiffUrl
+              },
               contents: [
                 {
-                  type: 'box',
-                  layout: 'vertical',
-                  borderWidth: '1px',
-                  borderColor: '#e5e5e5',
-                  cornerRadius: 'sm',
-                  paddingStart: 'md',
-                  paddingEnd: 'md',
-                  paddingTop: 'xs',
-                  paddingBottom: 'xs',
-                  flex: 0,
-                  contents: [
-                    {
-                      type: 'text',
-                      text: '驚喜活動',
-                      size: 'xxs',
-                      color: '#888888',
-                      weight: 'bold',
-                      align: 'center'
-                    }
-                  ]
+                  type: 'text',
+                  text: '驚喜活動',
+                  size: 'xs',
+                  color: '#888888',
+                  weight: 'bold',
+                  flex: 0
                 },
                 {
                   type: 'text',
@@ -506,13 +498,10 @@ function initSenderMode() {
               }
             },
             {
-              type: 'separator',
-              margin: 'md'
-            },
-            {
               type: 'box',
               layout: 'horizontal',
-              margin: 'md',
+              margin: 'lg',
+              paddingTop: 'md',
               alignItems: 'center',
               action: {
                 type: 'uri',
@@ -523,6 +512,7 @@ function initSenderMode() {
                 {
                   type: 'box',
                   layout: 'vertical',
+                  width: '20px',
                   height: '20px',
                   flex: 0,
                   contents: [
@@ -539,20 +529,10 @@ function initSenderMode() {
                   type: 'text',
                   text: 'LINE 禮物',
                   size: 'xs',
-                  color: '#b3b3b3',
-                  weight: 'bold',
+                  color: '#999999',
                   flex: 1,
                   margin: 'sm',
                   gravity: 'center'
-                },
-                {
-                  type: 'text',
-                  text: '>',
-                  size: 'lg',
-                  color: '#cccccc',
-                  flex: 0,
-                  gravity: 'center',
-                  align: 'end'
                 }
               ]
             }
