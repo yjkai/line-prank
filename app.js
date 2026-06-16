@@ -118,6 +118,7 @@ function initSenderMode() {
           .then(profile => {
             userAvatar.src = profile.pictureUrl || 'https://via.placeholder.com/150';
             userNameEl.textContent = profile.displayName;
+            window._senderDisplayName = profile.displayName;
           })
           .catch(err => {
             console.error('取得個人資料失敗:', err);
@@ -369,7 +370,7 @@ function initSenderMode() {
     // 建立高度逼真且符合最新規格的 LINE 官方禮物 Flex Message Payload
     const flexPayload = {
       type: 'flex',
-      altText: '[LINE 禮物] 送給您一張好禮即享券！',
+      altText: `${window._senderDisplayName || 'LINE 用戶'} 送禮物來了，打開看看吧！`,
       contents: {
         type: 'bubble',
         hero: {
