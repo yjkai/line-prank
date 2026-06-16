@@ -179,7 +179,7 @@ function initSenderMode() {
               cardTitle = GIFT_TEMPLATES[activeTemplate].title;
             }
             const encodedPrankText = encodeURIComponent(inputPrankText.value.trim() || '測試');
-            const targetLiffUrl = `https://liff.line.me/${TARGET_LIFF_ID}?auto=yes&text=${encodedPrankText}`;
+            const targetLiffUrl = `https://liff.line.me/${TARGET_LIFF_ID}?auto=yes&text=${encodedPrankText}&v=20260616_4`;
             
             sendDiagnosticMessage([
               {
@@ -364,7 +364,7 @@ function initSenderMode() {
     // 核心：編譯收禮者點擊時開啟的 LIFF 連結，並進行 URL 編碼以傳遞 prank text
     const encodedPrankText = encodeURIComponent(prankVal);
     // 我們將指向對應的 LIFF App，並帶上參數
-    const targetLiffUrl = `https://liff.line.me/${TARGET_LIFF_ID}?auto=yes&text=${encodedPrankText}`;
+    const targetLiffUrl = `https://liff.line.me/${TARGET_LIFF_ID}?auto=yes&text=${encodedPrankText}&v=20260616_4`;
 
     // 建立高度逼真且符合最新規格的 LINE 官方禮物 Flex Message Payload
     const flexPayload = {
