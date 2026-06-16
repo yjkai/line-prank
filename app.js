@@ -53,7 +53,7 @@ const GIFT_TEMPLATES = {
   },
   starbucks: {
     title: '【星巴克】特大杯巧克力可可碎片星冰樂雙杯組',
-    image: 'https://developers-resource.landpress.line.me/fx/img/01_1_cafe.png',
+    image: 'https://lcp-prod-obs.line-scdn.net/0hlRSsJa8WM31uCiBFnSxMKj9XPwxdezd1B3IuQEpPPTsgficoCCcuGDNMBk4GZA90LmQsRDsJFhIjMh9ZOWwdfjxSPisWcwpSKTAXUDcPETgzZiROUyo/w320',
     headerImage: 'https://yjkai.github.io/line-prank/justforyou.png'
   },
   brownsugar: {
@@ -512,6 +512,7 @@ function initSenderMode() {
               type: 'box',
               layout: 'horizontal',
               margin: 'md',
+              alignItems: 'center',
               action: {
                 type: 'uri',
                 label: 'LINE 禮物',
@@ -519,12 +520,19 @@ function initSenderMode() {
               },
               contents: [
                 {
-                  type: 'image',
-                  url: 'https://giftshop-tw.line-scdn.net/resource/image/favicon/v3/60x60.png',
-                  size: 'xxs',
+                  type: 'box',
+                  layout: 'vertical',
+                  height: '20px',
                   flex: 0,
-                  aspectRatio: '1:1',
-                  aspectMode: 'fit'
+                  contents: [
+                    {
+                      type: 'image',
+                      url: 'https://giftshop-tw.line-scdn.net/resource/image/favicon/v3/60x60.png',
+                      size: 'full',
+                      aspectRatio: '1:1',
+                      aspectMode: 'fit'
+                    }
+                  ]
                 },
                 {
                   type: 'text',
@@ -533,17 +541,17 @@ function initSenderMode() {
                   color: '#b3b3b3',
                   weight: 'bold',
                   flex: 1,
-                  margin: 'md',
+                  margin: 'sm',
                   gravity: 'center'
                 },
                 {
-                  type: 'image',
-                  url: 'https://yjkai.github.io/line-prank/chevron_icon.png?v=20260616_6',
-                  size: 'xxs',
+                  type: 'text',
+                  text: '>',
+                  size: 'lg',
+                  color: '#cccccc',
                   flex: 0,
-                  aspectRatio: '1:1',
-                  aspectMode: 'fit',
-                  gravity: 'center'
+                  gravity: 'center',
+                  align: 'end'
                 }
               ]
             }
