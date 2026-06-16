@@ -498,10 +498,13 @@ function initSenderMode() {
               }
             },
             {
+              type: 'separator',
+              margin: 'md'
+            },
+            {
               type: 'box',
               layout: 'horizontal',
-              margin: 'lg',
-              paddingTop: 'md',
+              margin: 'md',
               alignItems: 'center',
               action: {
                 type: 'uri',
