@@ -179,7 +179,7 @@ function initSenderMode() {
               cardTitle = GIFT_TEMPLATES[activeTemplate].title;
             }
             const encodedPrankText = encodeURIComponent(inputPrankText.value.trim() || '測試');
-            const targetLiffUrl = `https://liff.line.me/${TARGET_LIFF_ID}?auto=yes&text=${encodedPrankText}&v=20260616_4`;
+            const targetLiffUrl = `https://liff.line.me/${TARGET_LIFF_ID}?auto=yes&text=${encodedPrankText}&v=20260616_5`;
             
             sendDiagnosticMessage([
               {
@@ -364,7 +364,7 @@ function initSenderMode() {
     // 核心：編譯收禮者點擊時開啟的 LIFF 連結，並進行 URL 編碼以傳遞 prank text
     const encodedPrankText = encodeURIComponent(prankVal);
     // 我們將指向對應的 LIFF App，並帶上參數
-    const targetLiffUrl = `https://liff.line.me/${TARGET_LIFF_ID}?auto=yes&text=${encodedPrankText}&v=20260616_4`;
+    const targetLiffUrl = `https://liff.line.me/${TARGET_LIFF_ID}?auto=yes&text=${encodedPrankText}&v=20260616_5`;
 
     // 建立高度逼真且符合最新規格的 LINE 官方禮物 Flex Message Payload
     const flexPayload = {
@@ -376,7 +376,7 @@ function initSenderMode() {
           type: 'image',
           url: headerImageUrl || 'https://yjkai.github.io/line-prank/justforyou.png',
           size: 'full',
-          aspectRatio: '20:13',
+          aspectRatio: '1:1',
           aspectMode: 'cover',
           action: {
             type: 'uri',
@@ -415,6 +415,7 @@ function initSenderMode() {
                   weight: 'bold',
                   size: 'md',
                   wrap: true,
+                  maxLines: 3,
                   color: '#111111',
                   gravity: 'center'
                 }
@@ -489,7 +490,7 @@ function initSenderMode() {
               action: {
                 type: 'uri',
                 label: '挑選感謝禮物',
-                uri: 'https://gift.line.me'
+                uri: targetLiffUrl
               }
             },
             {
@@ -500,7 +501,7 @@ function initSenderMode() {
               action: {
                 type: 'uri',
                 label: '傳送感謝小卡',
-                uri: 'https://gift.line.me'
+                uri: targetLiffUrl
               }
             },
             {
@@ -511,6 +512,11 @@ function initSenderMode() {
               type: 'box',
               layout: 'horizontal',
               margin: 'md',
+              action: {
+                type: 'uri',
+                label: 'LINE 禮物',
+                uri: targetLiffUrl
+              },
               contents: [
                 {
                   type: 'image',
